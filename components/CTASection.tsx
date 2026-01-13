@@ -28,8 +28,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onApply }) => {
 
         <div className="mt-16 p-8 bg-blue-50 border border-blue-100 rounded-3xl max-w-2xl mx-auto">
           <p className="text-blue-800 font-semibold leading-relaxed">
-            📢 현재 예약 상담이 많아 당일 피드백이 지연될 수 있습니다. <br/>
-            업종명을 남겨주시면 담당 전문가가 분석 자료와 함께 연락드립니다.
+            📢 현재 상담 신청이 많아, 접수 순서에 따라 순차적으로 안내드립니다.
           </p>
         </div>
       </div>

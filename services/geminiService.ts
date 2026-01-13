@@ -3,9 +3,9 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { IndustryData } from "../types";
 
 export const getMarketInsights = async (industry: string, region: string): Promise<IndustryData> => {
-  // 브라우저 환경에서 process 객체가 없을 경우를 대비한 안전한 처리
-  const globalEnv = (globalThis as any).process?.env || {};
-  const apiKey = globalEnv.API_KEY || "";
+  // 브라우저 환경에서 process 객체 부재로 인한 Crash 방지
+  const env = (globalThis as any).process?.env || {};
+  const apiKey = env.API_KEY || "";
   
   if (!apiKey) {
     throw new Error("API Key가 설정되지 않았습니다.");
@@ -60,7 +60,7 @@ export const getMarketInsights = async (industry: string, region: string): Promi
     if (!text) throw new Error("Empty response");
     return JSON.parse(text);
   } catch (e) {
-    console.error("Gemini API Parse Error:", e);
-    throw new Error("데이터 분석 중 오류가 발생했습니다.");
+    console.error("Gemini API Error:", e);
+    throw new Error("시장 분석 데이터를 불러오는 중 오류가 발생했습니다.");
   }
 };
