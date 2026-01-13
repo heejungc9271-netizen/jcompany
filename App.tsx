@@ -26,9 +26,7 @@ const Header: React.FC = () => (
       </h1>
       <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed px-4">
         데이터는 거짓말을 하지 않습니다. <br className="md:hidden" />
-        <span className="hidden md:inline"><br/></span>
-        전략가들이 설계하는 <br className="md:hidden" />
-        압도적인 수주 성과, <br className="md:hidden" />
+        전략가들이 설계하는 압도적인 수주 성과, <br className="md:hidden" />
         이제 대표님의 차례입니다.
       </p>
     </div>
@@ -62,7 +60,7 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* Sticky Mobile CTA - 하단 고정 버튼 */}
+      {/* Sticky Mobile CTA */}
       <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md">
         <button 
           onClick={handleApply}
