@@ -19,7 +19,7 @@ const Header: React.FC = () => (
       </div>
       <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight px-2">
         공공조달 <br className="md:hidden" />
-        <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.5)]">낙찰의 공식</span>
+        <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.6)]">낙찰의 공식</span>
         <span className="text-white">을</span> <br className="md:hidden" />
         <span className="hidden md:inline"><br/></span>
         깨우다
@@ -62,7 +62,7 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* Sticky Mobile CTA - 하단 고정 버튼 (노란색) */}
+      {/* Sticky Mobile CTA - 하단 고정 버튼 */}
       <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md">
         <button 
           onClick={handleApply}

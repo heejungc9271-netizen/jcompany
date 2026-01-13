@@ -3,24 +3,19 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { IndustryData } from "../types";
 
 export const getMarketInsights = async (industry: string, region: string): Promise<IndustryData> => {
-  // 브라우저 배포 환경에서 process.env가 정의되지 않았을 경우를 대비한 안전한 처리
-  let apiKey = "";
-  try {
-    // @ts-ignore
-    apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : "";
-  } catch (e) {
-    console.warn("API Key access check skipped or failed.");
-  }
+  // 브라우저 런타임에서 process가 없을 경우를 대비한 안전한 체크
+  const env = (globalThis as any).process?.env || {};
+  const apiKey = env.API_KEY || "";
   
   if (!apiKey) {
-    throw new Error("서비스 구성을 위한 API Key가 설정되지 않았습니다.");
+    throw new Error("API Key가 설정되지 않았습니다.");
   }
 
   const ai = new GoogleGenAI({ apiKey });
   
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
-    contents: `대표님께서 요청하신 업종 [${industry}]과 지역 [${region}]에 대한 공공조달 시장 분석을 수행해줘. 실무 전문가 관점에서 매우 구체적이고 신뢰감 있는 데이터를 JSON 형식으로 반환해.`,
+    contents: `대표님께서 요청하신 업종 [${industry}]과 지역 [${region}]에 대한 공공조달 시장 분석을 수행해줘. 실무 전문가 관점에서 구체적인 데이터를 JSON 형식으로 반환해.`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -62,10 +57,10 @@ export const getMarketInsights = async (industry: string, region: string): Promi
 
   try {
     const text = response.text;
-    if (!text) throw new Error("Empty response from AI");
+    if (!text) throw new Error("Empty response");
     return JSON.parse(text);
   } catch (e) {
-    console.error("Gemini API Error:", e);
-    throw new Error("시장 데이터를 분석하는 도중 오류가 발생했습니다.");
+    console.error("Gemini Parse Error:", e);
+    throw new Error("시장 데이터 분석 중 오류가 발생했습니다.");
   }
 };
